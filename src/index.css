@@ -1,0 +1,47 @@
+:root {
+  --app-height: 100%;
+  --app-width: 100%;
+}
+
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  height: var(--app-height);
+  width: var(--app-width);
+}
+
+#root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  /* Responsive */
+  font-size: 16px;
+
+  background-color: #f9f9f9;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: auto;
+}
+
+.ant-layout {
+  width: 100%;
+  height: 100%;
+}
+
+.user-menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #00000090;
+}
