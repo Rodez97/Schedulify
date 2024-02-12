@@ -1,7 +1,7 @@
 {
-  "name": "my-vue-app",
+  "name": "schedulify",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -113,5 +113,8 @@
     "vite-plugin-pwa": "^0.16.4",
     "vite-plugin-svgr": "^3.2.0",
     "vite-svg-loader": "^4.0.0"
+  },
+  "volta": {
+    "node": "18.19.0"
   }
 }
