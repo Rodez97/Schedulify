@@ -1,17 +1,4 @@
 {
-  "functions": [
-    {
-      "source": "functions",
-      "codebase": "default",
-      "ignore": [
-        "node_modules",
-        ".git",
-        "firebase-debug.log",
-        "firebase-debug.*.log"
-      ],
-      "predeploy": ["npm --prefix \"$RESOURCE_DIR\" run build"]
-    }
-  ],
   "hosting": {
     "site": "schedulify-pro",
     "public": "dist",
@@ -20,10 +7,10 @@
       {
         "source": "**",
         "headers": [
-          { "key": "Access-Control-Allow-Origin", "value": "*" },
-          { "key": "X-Frame-Options", "value": "deny" },
-          { "key": "X-Content-Type-Options", "value": "nosniff" },
-          { "key": "X-XSS-Protection", "value": "1; mode=block" },
+          {"key": "Access-Control-Allow-Origin", "value": "*"},
+          {"key": "X-Frame-Options", "value": "deny"},
+          {"key": "X-Content-Type-Options", "value": "nosniff"},
+          {"key": "X-XSS-Protection", "value": "1; mode=block"},
           {
             "key": "Content-Encoding",
             "value": "gzip"
