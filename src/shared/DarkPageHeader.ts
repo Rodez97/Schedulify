@@ -1,6 +1,6 @@
 import {PageHeader} from "@ant-design/pro-layout";
 import styled from "@emotion/styled";
-import {Colors} from "../../utils/Colors";
+import {Colors} from "../utils/Colors";
 
 export default styled(PageHeader)`
   background-color: ${Colors.MainDark};

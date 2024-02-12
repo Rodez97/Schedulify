@@ -3,7 +3,9 @@ import {useMemo, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useSelectedTeam} from "../../../contexts/SelectedTeam/useSelectedTeam";
 import useSelectedTeamActions from "../../../contexts/SelectedTeam/useSelectedTeamActions";
-import parseEmployeesFromCSV, {type CSVRow} from "../parseEmployeesFromCSV";
+import parseEmployeesFromCSV, {
+  type CSVRow,
+} from "../../../utils/parseEmployeesFromCSV";
 
 function BulkEmployeesAddModal(props: {open: boolean; onCancel: () => void}) {
   const {t} = useTranslation();

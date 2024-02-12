@@ -1,15 +1,15 @@
 import {useTranslation} from "react-i18next";
 import PasswordPanel from "./PasswordPanel";
 import ProfilePanel from "./ProfilePanel";
-import {Layout, Tabs, type TabsProps} from "antd/es";
-import GrayPageHeader from "../../shared/atoms/GrayPageHeader";
+import {Layout, Tabs} from "antd/es";
+import GrayPageHeader from "../../shared/GrayPageHeader";
 import {useDocumentData} from "react-firebase-hooks/firestore";
 import {doc} from "firebase/firestore";
 import {FIRESTORE} from "../../firebase";
 import {useMainUser} from "../../contexts/MainUser/useMainUser";
 import {MainUserConverter} from "../../contexts/MainUser/MainUser";
-import LoadingPage from "../../shared/molecules/LoadingPage";
-import ErrorPage from "../../shared/molecules/PageError";
+import LoadingPage from "../../shared/LoadingPage";
+import ErrorPage from "../../shared/PageError";
 
 function Account() {
   const {t} = useTranslation();
@@ -26,19 +26,6 @@ function Account() {
     return <ErrorPage error={error} />;
   }
 
-  const items: TabsProps["items"] = [
-    {
-      key: "1",
-      label: t("account.basic"),
-      children: <ProfilePanel userDocument={userDocument} />,
-    },
-    {
-      key: "2",
-      label: t("password"),
-      children: <PasswordPanel />,
-    },
-  ];
-
   return (
     <Layout>
       <GrayPageHeader title={t("account.details")} />
@@ -51,7 +38,18 @@ function Account() {
         }}>
         <Tabs
           defaultActiveKey="1"
-          items={items}
+          items={[
+            {
+              key: "1",
+              label: t("account.basic"),
+              children: <ProfilePanel userDocument={userDocument} />,
+            },
+            {
+              key: "2",
+              label: t("password"),
+              children: <PasswordPanel />,
+            },
+          ]}
           centered
           css={{
             width: "100%",

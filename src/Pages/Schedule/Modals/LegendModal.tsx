@@ -1,8 +1,8 @@
 import {css} from "@emotion/react";
 import {Modal} from "antd/es";
-import i18next from "i18next";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCommentDots, faSquare} from "@fortawesome/free-solid-svg-icons";
+import {useTranslation} from "react-i18next";
 
 const elementStyle = css`
   display: flex;
@@ -10,10 +10,17 @@ const elementStyle = css`
   gap: 0.5em;
 `;
 
-export default function ShowLegend() {
-  Modal.info({
-    title: i18next.t("legend").toString(),
-    content: (
+export default function LegendModal({
+  visible,
+  onClose,
+}: {
+  visible: boolean;
+  onClose?: () => void;
+}) {
+  const {t} = useTranslation();
+
+  return (
+    <Modal open={visible} onOk={onClose} title={t("legend")}>
       <div
         css={{
           display: "flex",
@@ -28,7 +35,7 @@ export default function ShowLegend() {
               fontSize: "1.5em",
             }}
           />
-          {" " + i18next.t("published").toString()}
+          {" " + t("published")}
         </div>
         <div css={elementStyle}>
           <FontAwesomeIcon
@@ -38,7 +45,7 @@ export default function ShowLegend() {
               fontSize: "1.5em",
             }}
           />
-          {" " + i18next.t("pending.publishing").toString()}
+          {" " + t("pending.publishing")}
         </div>
         <div css={elementStyle}>
           <FontAwesomeIcon
@@ -48,13 +55,13 @@ export default function ShowLegend() {
               fontSize: "1.5em",
             }}
           />
-          {" " + i18next.t("pending.deletion").toString()}
+          {" " + t("pending.deletion")}
         </div>
         <div css={elementStyle}>
           <FontAwesomeIcon icon={faCommentDots} css={{fontSize: "1.5em"}} />
-          {" " + i18next.t("notes").toString()}
+          {" " + t("notes")}
         </div>
       </div>
-    ),
-  });
+    </Modal>
+  );
 }

@@ -1,5 +1,4 @@
 import dayjs from "dayjs";
-import {useMemo} from "react";
 import isoWeek from "dayjs/plugin/isoWeek";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -7,9 +6,9 @@ import {Button, Space, Typography} from "antd/es";
 import {LeftCircleOutlined, RightCircleOutlined} from "@ant-design/icons";
 import {upperFirst} from "lodash";
 import {css} from "@emotion/react";
-import ThisWeekTag from "./ThisWeekTag";
-import {parseWeekId} from "../../contexts/ScheduleData/helpers";
-import {WEEKFORMAT} from "../../utils/constants";
+import ThisWeekTag from "../Pages/ReadonlySchedule/ThisWeekTag";
+import {parseWeekId} from "../contexts/ScheduleData/helpers";
+import {WEEKFORMAT} from "../utils/constants";
 dayjs.extend(isoWeek);
 dayjs.extend(advancedFormat);
 dayjs.extend(customParseFormat);
@@ -18,6 +17,13 @@ interface IWeekNavigator {
   onChange: (weekId: string) => void;
   currentWeekId: string;
 }
+
+const getTextContent = (weekId: string) => {
+  const {start, end} = parseWeekId(weekId);
+  const firstDayWeek = upperFirst(start.format("MMMM DD"));
+  const lastDayWeek = upperFirst(end.format("MMMM DD, YYYY"));
+  return `${firstDayWeek} - ${lastDayWeek}`;
+};
 
 function WeekNavigator({onChange, currentWeekId}: IWeekNavigator) {
   const forwardWeek = () => {
@@ -29,17 +35,9 @@ function WeekNavigator({onChange, currentWeekId}: IWeekNavigator) {
     onChange(start.subtract(1, "week").format(WEEKFORMAT));
   };
 
-  const textContent = useMemo(() => {
-    const {start, end} = parseWeekId(currentWeekId);
-
-    const firstDayWeek = upperFirst(start.format("MMMM DD"));
-    const lastDayWeek = upperFirst(end.format("MMMM DD, YYYY"));
-    return `${firstDayWeek} - ${lastDayWeek}`;
-  }, [currentWeekId]);
-
   return (
     <div>
-      <Space align="center" css={{justifyContent: "center"}}>
+      <Space align="center" style={{justifyContent: "center"}}>
         <Button
           onClick={backWeek}
           shape="circle"
@@ -56,7 +54,7 @@ function WeekNavigator({onChange, currentWeekId}: IWeekNavigator) {
               font-size: 1rem;
             }
           `}>
-          {textContent}
+          {getTextContent(currentWeekId)}
         </Typography.Text>
         <Button
           onClick={forwardWeek}

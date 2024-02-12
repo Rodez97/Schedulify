@@ -1,5 +1,5 @@
 import {useTranslation} from "react-i18next";
-import {useNavigate} from "react-router-dom";
+import {type NavigateFunction, useNavigate} from "react-router-dom";
 import {Alert, Button, Checkbox, Form, Input, Typography} from "antd/es";
 import {useState} from "react";
 import {
@@ -7,20 +7,35 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithPopup,
+  type User,
 } from "firebase/auth";
-import {AUTH} from "../../firebase";
+import {AUTH, FIRESTORE} from "../../firebase";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faGoogle} from "@fortawesome/free-brands-svg-icons";
 import {errorTypeGuard} from "../../utils/analyticsHelpers";
 import userSignUpConversion from "../../utils/userSignUpConversion";
-import {useMainUserRaw} from "../../contexts/MainUser/useMainUser";
+import {doc, setDoc} from "firebase/firestore";
+
+const createUserRecord = async (user: User, navigate: NavigateFunction) => {
+  const newUserData = {
+    displayName:
+      user.displayName ??
+      (user.email != null ? user.email.split("@")[0] : "John Doe"),
+    email: user.email,
+    photoUrl: user.photoURL,
+    uid: user.uid,
+    phoneNumber: user.phoneNumber,
+  };
+  await setDoc(doc(FIRESTORE, "users", user.uid), newUserData);
+
+  navigate("/", {replace: true});
+};
 
 const AuthSignUp = () => {
   const navigate = useNavigate();
   const {t} = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<AuthError>();
-  const {createFirstSchedule} = useMainUserRaw();
 
   const onFinish = async ({
     email,
@@ -37,11 +52,8 @@ const AuthSignUp = () => {
         email,
         password,
       );
-
-      const scheduleId = await createFirstSchedule(newUser.user.uid);
-
-      navigate(`/schedule/${scheduleId}`, {replace: true});
-
+      const {user} = newUser;
+      await createUserRecord(user, navigate);
       userSignUpConversion();
     } catch (error) {
       if (errorTypeGuard<AuthError>(error, "code")) {
@@ -64,8 +76,8 @@ const AuthSignUp = () => {
       const isNewUser: boolean = (newUser as any)._tokenResponse.isNewUser;
 
       if (isNewUser) {
-        const scheduleId = await createFirstSchedule(newUser.user.uid);
-        navigate(`/schedule/${scheduleId}`, {replace: true});
+        const {user} = newUser;
+        await createUserRecord(user, navigate);
         userSignUpConversion();
       }
     } catch (error) {

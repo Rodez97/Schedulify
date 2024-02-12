@@ -4,8 +4,8 @@ import axios from "axios";
 import {useSendEmailVerification} from "react-firebase-hooks/auth";
 import {useTranslation} from "react-i18next";
 import {useCountdown, useSessionstorageState} from "rooks";
-import {AUTH, FIREBASE_CONFIG} from "../../firebase";
-import {useMainUser} from "../../contexts/MainUser/useMainUser";
+import {AUTH, FIREBASE_CONFIG} from "../firebase";
+import {useMainUser} from "../contexts/MainUser/useMainUser";
 
 const initialCounterTime = new Date();
 

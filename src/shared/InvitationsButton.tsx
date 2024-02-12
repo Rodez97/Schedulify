@@ -1,6 +1,8 @@
 import {useCollectionData} from "react-firebase-hooks/firestore";
-import type CollaboratorRequest from "../../Pages/Collaborators/CollaboratorRequest";
-import {CollaboratorRequestConverter} from "../../Pages/Collaborators/CollaboratorRequest";
+import {
+  type CollaboratorRequest,
+  CollaboratorRequestConverter,
+} from "../Pages/Collaborators/CollaboratorRequest";
 import {
   collection,
   deleteDoc,
@@ -9,8 +11,8 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import {FIRESTORE} from "../../firebase";
-import {useMainUser} from "../../contexts/MainUser/useMainUser";
+import {FIRESTORE} from "../firebase";
+import {useMainUser} from "../contexts/MainUser/useMainUser";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBell} from "@fortawesome/free-solid-svg-icons";
 import {css} from "@emotion/react";
@@ -18,7 +20,7 @@ import React, {useState} from "react";
 import {Card, Drawer} from "antd";
 import {useTranslation} from "react-i18next";
 import {CheckOutlined, CloseOutlined} from "@ant-design/icons";
-import {Colors} from "../../utils/Colors";
+import {Colors} from "../utils/Colors";
 
 const cssInfiniteShakingAnimation = css`
   animation: shake 2s infinite;

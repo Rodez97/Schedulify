@@ -6,8 +6,7 @@ import isoWeek from "dayjs/plugin/isoWeek";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import isToday from "dayjs/plugin/isToday";
 import {useTranslation} from "react-i18next";
-import ScheduleSummaryElement from "./ScheduleSummaryElement";
-import WeekNavigator from "./WeekNavigator";
+import ScheduleSummaryElement from "./ScheduleSummaryElement/ScheduleSummaryElement";
 import {
   Button,
   Dropdown,
@@ -22,13 +21,13 @@ import "./ShiftTable.scss";
 import ManageShiftModal, {
   type ManageShiftModalRef,
 } from "./Modals/ManageShiftModal";
-import ShowLegend from "./ShowLegend";
+import LegendModal from "./Modals/LegendModal";
 import useGeneratePdfBtn from "./useGeneratePdfBtn";
 import type Member from "../../types/Member";
 import {useSelectedTeam} from "../../contexts/SelectedTeam/useSelectedTeam";
-import ErrorPage from "../../shared/molecules/PageError";
-import GrayPageHeader from "../../shared/atoms/GrayPageHeader";
-import PageHeaderButtons from "../../shared/molecules/PageHeaderButtons";
+import ErrorPage from "../../shared/PageError";
+import GrayPageHeader from "../../shared/GrayPageHeader";
+import PageHeaderButtons from "../../shared/PageHeaderButtons";
 import ManageMemberDrawer, {
   type ManageMemberDrawerRef,
 } from "./ManageMemberDrawer";
@@ -45,12 +44,13 @@ import {
   faQuestion,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import ResponsiveButton from "../../shared/molecules/ResponsiveButton";
+import ResponsiveButton from "../../shared/ResponsiveButton";
 import SchedulerTableHead from "./SchedulerTableHead";
 import SchedulerMemberRow from "./SchedulerMemberRow";
 import {SCHEDULE_VISIBILITY} from "../../utils/constants";
 import {type Shift} from "../../types/Shift";
 import {useSchedule} from "../../contexts/ScheduleData/useSchedule";
+import WeekNavigator from "../../shared/WeekNavigator";
 dayjs.extend(isoWeek);
 dayjs.extend(advancedFormat);
 dayjs.extend(isToday);
@@ -73,6 +73,7 @@ function Scheduler() {
   const manageShiftDialogRef = useRef<ManageShiftModalRef>(null);
   const [cloneDialogOpen, setCloneDialogOpen] = useState(false);
   const {generatePdf, generatingFile, generateExcelFile} = useGeneratePdfBtn();
+  const [legendDialogOpen, setLegendDialogOpen] = useState(false);
 
   // Create an array of objects containing employee data and their shifts
   const sortedMembers = useMemo(() => {
@@ -113,7 +114,12 @@ function Scheduler() {
             align-items: center;
             gap: 8px;
           `}>
-          <FontAwesomeIcon icon={faQuestion} onClick={ShowLegend} />
+          <FontAwesomeIcon
+            icon={faQuestion}
+            onClick={() => {
+              setLegendDialogOpen(true);
+            }}
+          />
           <Typography.Text
             css={css`
               font-size: 16px;
@@ -303,6 +309,13 @@ function Scheduler() {
       <ManageShiftModal ref={manageShiftDialogRef} />
 
       <ManageMemberDrawer ref={manageMemberDialogRef} />
+
+      <LegendModal
+        visible={legendDialogOpen}
+        onClose={() => {
+          setLegendDialogOpen(false);
+        }}
+      />
 
       <CloneScheduleModal
         open={cloneDialogOpen}

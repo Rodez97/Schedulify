@@ -1,6 +1,6 @@
-import DarkPageHeader from "./atoms/DarkPageHeader";
-import UserMenu from "./organisms/UserMenu";
-import InvitationsButton from "./molecules/InvitationsButton";
+import DarkPageHeader from "./DarkPageHeader";
+import UserMenu from "./UserMenu";
+import InvitationsButton from "./InvitationsButton";
 import {useMainUser} from "../contexts/MainUser/useMainUser";
 import {useCollectionData} from "react-firebase-hooks/firestore";
 import {

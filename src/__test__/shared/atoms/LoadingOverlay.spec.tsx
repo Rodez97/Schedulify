@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
-import LoadingOverlay from "../../../shared/atoms/LoadingOverlay";
+import {render, screen} from "@testing-library/react";
+import LoadingOverlay from "../../../shared/LoadingOverlay";
 
 describe("Test Loading Overlay", () => {
   // Renders a loading overlay with a spinner when 'open' is true

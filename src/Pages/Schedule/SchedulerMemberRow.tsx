@@ -4,6 +4,7 @@ import {type Shift} from "../../types/Shift";
 import {SCHEDULE_VISIBILITY} from "../../utils/constants";
 import EmpColumnCell from "./EmpColumnCell";
 import ShiftCell from "./ShiftCell";
+import styled from "@emotion/styled";
 
 interface Props {
   member: Member;
@@ -41,17 +42,13 @@ function SchedulerMemberRow({member, statusFilter, searchQuery}: Props) {
   const {weekDays, shifts} = useSchedule();
   const memberShifts = getShiftsByMember(shifts, member.id);
   return (
-    <tr
-      style={{
-        display: getIfShouldShow(
-          memberShifts.length,
-          member,
-          statusFilter,
-          searchQuery,
-        )
-          ? ""
-          : "none",
-      }}>
+    <SchedulerMemberTableRow
+      visible={getIfShouldShow(
+        memberShifts.length,
+        member,
+        statusFilter,
+        searchQuery,
+      )}>
       <th>
         <EmpColumnCell member={member} key={member.id} />
       </th>
@@ -67,8 +64,13 @@ function SchedulerMemberRow({member, statusFilter, searchQuery}: Props) {
           </td>
         );
       })}
-    </tr>
+    </SchedulerMemberTableRow>
   );
 }
 
 export default SchedulerMemberRow;
+
+const SchedulerMemberTableRow = styled.tr<{visible: boolean}>`
+  display: ${props => (props.visible ? "table-row" : "none")};
+  transition: display 0.2s ease-in-out;
+`;

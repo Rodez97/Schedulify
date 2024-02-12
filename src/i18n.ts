@@ -4,8 +4,8 @@ import "dayjs/locale/es";
 import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import {initReactI18next} from "react-i18next";
-import spanish from "./i18n/es.json";
-import english from "./i18n/en.json";
+import spanish from "./i18n/es/translation.json";
+import english from "./i18n/en/translation.json";
 
 // don't want to use this?
 // have a look at the Quick start guide

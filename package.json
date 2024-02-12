@@ -11,8 +11,9 @@
     "preview": "vite preview",
     "translations-authorize": "gs-i18n-json authorize",
     "translations-update": "gs-i18n-json update",
-    "firebase-deploy": "firebase deploy --only hosting:schedulify-pro",
-    "deploy-rules": "firebase deploy --only firestore:rules",
+    "deploy": "firebase deploy --only hosting:schedulify-pro",
+    "deploy:rules": "firebase deploy --only firestore:rules",
+    "deploy:functions": "firebase deploy --only functions",
     "test": "jest",
     "test:watch": "jest --watch"
   },

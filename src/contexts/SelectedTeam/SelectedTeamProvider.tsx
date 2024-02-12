@@ -1,7 +1,7 @@
 import {type ReactNode, useMemo} from "react";
 import {useSelectedTeamData} from "./useSelectedTeamData";
 import {useParams} from "react-router-dom";
-import LoadingPage from "../../shared/molecules/LoadingPage";
+import LoadingPage from "../../shared/LoadingPage";
 import {useMainUser} from "../MainUser/useMainUser";
 import {SelectedTeamContext} from "./SelectedTeamContext";
 

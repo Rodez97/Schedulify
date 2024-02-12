@@ -9,7 +9,7 @@ import {
 import {doc} from "firebase/firestore";
 import {useParams} from "react-router-dom";
 import {FIRESTORE} from "../../firebase";
-import LoadingPage from "../../shared/molecules/LoadingPage";
+import LoadingPage from "../../shared/LoadingPage";
 import {useDocumentData} from "react-firebase-hooks/firestore";
 import type PublicSchedule from "../../types/PublicSchedule";
 import {ReadonlyScheduleConverter} from "../../types/PublicSchedule";

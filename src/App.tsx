@@ -2,7 +2,7 @@ import {Suspense} from "react";
 import {Navigate, Route, Routes} from "react-router-dom";
 import ReadonlySchedule from "./Pages/ReadonlySchedule/ReadonlySchedule";
 import {useMainUserRaw} from "./contexts/MainUser/useMainUser";
-import LoadingPage from "./shared/molecules/LoadingPage";
+import LoadingPage from "./shared/LoadingPage";
 import AuthPages from "./Pages/Auth";
 import {Layout} from "antd";
 import {MainHeader} from "./shared/MainHeader";

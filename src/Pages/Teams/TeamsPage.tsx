@@ -4,14 +4,14 @@ import {PageHeader} from "@ant-design/pro-layout";
 import {useRef} from "react";
 import {useMainUser} from "../../contexts/MainUser/useMainUser";
 import MyTeams from "./MyTeams";
-import LoadingPage from "../../shared/molecules/LoadingPage";
+import LoadingPage from "../../shared/LoadingPage";
 import ManageScheduleModal, {type ManageTeamRef} from "./ManageTeamModal";
 import type Team from "../../types/Team";
 import {ScheduleConverter} from "../../types/Team";
 import {FIRESTORE} from "../../firebase";
 import {and, collection, or, query, where} from "firebase/firestore";
 import {useCollectionData} from "react-firebase-hooks/firestore";
-import PageError from "../../shared/molecules/PageError";
+import PageError from "../../shared/PageError";
 
 const {Content} = Layout;
 

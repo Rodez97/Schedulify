@@ -1,6 +1,6 @@
 import {Button, Layout, Tabs} from "antd";
 import {useMemo, useState} from "react";
-import GrayPageHeader from "../../shared/atoms/GrayPageHeader";
+import GrayPageHeader from "../../shared/GrayPageHeader";
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -16,8 +16,8 @@ import {
 } from "./CollaboratorRequest";
 import {collection, query, where} from "firebase/firestore";
 import {FIRESTORE} from "../../firebase";
-import LoadingPage from "../../shared/molecules/LoadingPage";
-import ErrorPage from "../../shared/molecules/PageError";
+import LoadingPage from "../../shared/LoadingPage";
+import ErrorPage from "../../shared/PageError";
 
 function Collaborators() {
   const navigate = useNavigate();

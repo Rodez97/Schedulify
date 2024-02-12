@@ -1,10 +1,10 @@
-import { firestore as firestoreAdmin } from "firebase-admin";
-import { firestore } from "firebase-functions/v1";
+import {firestore as firestoreAdmin} from "firebase-admin";
+import {firestore} from "firebase-functions/v1";
 
 export const onUserDocumentChanged = firestore
   .document("users/{uid}")
   .onUpdate(async (change, context) => {
-    const { uid } = context.params;
+    const {uid} = context.params;
     const afterName = change.after.get("displayName");
     const beforeName = change.before.get("displayName");
 
@@ -24,12 +24,12 @@ export const onUserDocumentChanged = firestore
 
     const batch = firestoreAdmin().batch();
 
-    schedules.forEach((scheduleDoc) => {
+    schedules.forEach(scheduleDoc => {
       batch.update(
         firestoreAdmin().collection("scheduleMembership").doc(scheduleDoc.id),
         {
           [`collaborators.${uid}.name`]: afterName,
-        }
+        },
       );
     });
 
